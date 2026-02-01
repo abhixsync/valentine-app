@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #fce7f3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        body.celebration {
+            background: linear-gradient(135deg, #fbcfe8 0%, #e9d5ff 50%, #fbcfe8 100%);
+        }
+
+        .card {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            max-width: 32rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                padding: 3rem;
+            }
+        }
+
+        .owl-container {
+            margin-bottom: 2rem;
+        }
+
+        svg {
+            width: 120px;
+            height: 140px;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        .valentine-text {
+            color: #ec4899;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 6rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .buttons-container {
+                flex-direction: row;
+            }
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            outline: none;
+        }
+
+        .yes-btn {
+            padding: 1rem 3rem;
+            background: linear-gradient(to right, #ec4899, #f43f5e);
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .yes-btn:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .no-btn {
+            padding: 0.75rem 2rem;
+            background-color: #d1d5db;
+            color: #1f2937;
+            font-size: 1.125rem;
+            position: absolute;
+        }
+
+        .no-btn:hover {
+            background-color: #9ca3af;
+        }
+
+        .message {
+            color: #4b5563;
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+
+        /* Celebration Screen */
+        .celebration-container {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .celebration-container.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-2rem);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ec4899;
+            animation: confetti-fall 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        .big-heart {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 0.8s ease-in-out infinite, scaleIn 0.5s ease-out;
+            filter: drop-shadow(0 4px 12px rgba(236, 72, 153, 0.4));
+        }
+
+        .celebration-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: scaleIn 0.6s ease-out;
+            letter-spacing: -1px;
+        }
+
+        .celebration-subtitle {
+            font-size: 1.3rem;
+            color: #6b21a8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+            line-height: 1.6;
+        }
+
+        .celebration-emoji {
+            font-size: 4rem;
+            display: inline-block;
+            animation: spin 2s linear infinite, float 2s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(168, 85, 247, 0.3));
+        }
+    </style>
+</head>
+<body>
+    <div id="proposal" class="card">
+        <div class="owl-container">
+            <svg width="120" height="140" viewBox="0 0 120 140">
+                <!-- Body -->
+                <circle cx="60" cy="75" r="40" fill="#D4A574" />
+                <!-- Head -->
+                <circle cx="60" cy="45" r="35" fill="#E8B88A" />
+                <!-- Left eye white -->
+                <circle cx="45" cy="35" r="12" fill="white" />
+                <!-- Right eye white -->
+                <circle cx="75" cy="35" r="12" fill="white" />
+                <!-- Left pupil -->
+                <circle cx="45" cy="35" r="8" fill="black" />
+                <!-- Right pupil -->
+                <circle cx="75" cy="35" r="8" fill="black" />
+                <!-- Beak -->
+                <polygon points="60,48 55,58 65,58" fill="#F4A460" />
+                <!-- Left ear -->
+                <polygon points="30,15 20,5 35,20" fill="#D4A574" />
+                <!-- Right ear -->
+                <polygon points="90,15 100,5 85,20" fill="#D4A574" />
+                <!-- Heart on head -->
+                <g transform="translate(85, 8)">
+                    <path
+                        d="M 0,-5 C -2,-7 -6,-7 -8,-5 C -10,-3 -10,1 0,8 C 10,1 10,-3 8,-5 C 6,-7 2,-7 0,-5"
+                        fill="#E91E63"
+                    />
+                </g>
+            </svg>
+        </div>
+
+        <h1>
+           Sanjana will you be my
+            <span class="valentine-text">valentine</span>?
+        </h1>
+
+        <div class="buttons-container">
+            <button class="yes-btn" onclick="showCelebration()">Yes 💕</button>
+            <button class="no-btn" id="noBtn" onmouseenter="moveButton()" onclick="moveButton()">No</button>
+        </div>
+
+        <p class="message">*"No" seems a bit shy 🥰</p>
+    </div>
+
+    <div id="celebration" class="celebration-container">
+        <div class="big-heart">💕</div>
+        <h2 class="celebration-title">I love you!</h2>
+        <p class="celebration-subtitle">You make me the happiest person alive 💗</p>
+        <div class="celebration-emoji">🎉</div>
+    </div>
+
+    <script>
+        function createConfetti() {
+            const confettiCount = 50;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.background = ['#ec4899', '#f43f5e', '#a855f7', '#fbbf24'][Math.floor(Math.random() * 4)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3500);
+            }
+        }
+
+        function showCelebration() {
+            document.getElementById('proposal').style.display = 'none';
+            document.getElementById('celebration').classList.add('show');
+            document.body.classList.add('celebration');
+            createConfetti();
+        }
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const randomX = Math.random() * 200 - 100;
+            const randomY = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // Add touch support for mobile
+        document.getElementById('noBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            moveButton();
+        });
+    </script>
+</body>
+</html>
