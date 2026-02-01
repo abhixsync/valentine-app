@@ -754,6 +754,118 @@
             text-decoration: line-through;
         }
 
+        /* Wedding Page */
+        .wedding-intro {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+            border-radius: 1rem;
+        }
+
+        .wedding-date {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ec4899;
+            margin-bottom: 1rem;
+        }
+
+        .wedding-message {
+            font-size: 1.2rem;
+            color: #1f2937;
+            font-style: italic;
+        }
+
+        .wedding-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .wedding-section {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid #ec4899;
+        }
+
+        .wedding-section h3 {
+            color: #ec4899;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .wedding-photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .wedding-photo-item {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .wedding-photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        .wedding-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .wedding-photo-caption {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .wedding-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .wedding-note {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid #ec4899;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #1f2937;
+            font-style: italic;
+        }
+
         /* Love Letters */
         .love-letters-container {
             display: grid;
@@ -1223,6 +1335,11 @@
     <div id="mainMenu" class="nav-container">
         <h2 class="nav-title">💕 Everything for You, Sanjana 💕</h2>
         <div class="features-grid" id="featuresGrid">
+                <div class="feature-card" onclick="showPage('wedding')">
+                    <div class="feature-icon">💍</div>
+                    <div class="feature-title">Our Wedding</div>
+                    <div class="feature-desc">Our special day - November 24, 2025</div>
+                </div>
                 <div class="feature-card" onclick="showPage('countdown')">
                     <div class="feature-icon">⏰</div>
                     <div class="feature-title">Our Journey</div>
@@ -1297,6 +1414,164 @@
                     <div class="feature-icon">🔍</div>
                     <div class="feature-title">Secret Messages</div>
                     <div class="feature-desc">Hidden surprises for you</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wedding Page -->
+    <div id="wedding" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">💍 Our Wedding Day</h2>
+            <div class="wedding-intro">
+                <div class="wedding-date">November 24, 2025</div>
+                <p class="wedding-message">💕 The day I married my best friend, my love, my forever. 💕</p>
+            </div>
+
+            <div class="wedding-sections">
+                <div class="wedding-section">
+                    <h3>📅 Our Wedding Timeline</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Getting Ready</div>
+                                <p>All the preparation and excitement before the big moment</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">The Ceremony</div>
+                                <p>The moment we became husband and wife</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">The Reception</div>
+                                <p>Celebrating with our loved ones</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Forever Starts Now</div>
+                                <p>Beginning our journey as husband and wife</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wedding-section">
+                    <h3>📸 Wedding Memories</h3>
+                    <div class="wedding-photos">
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (1).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Our Special Day</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (2).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Forever Begins</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (3).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Happily Ever After</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (4).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">The Best Day</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (5).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Our Love Story</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (6).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Mr & Mrs</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (7).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Beautiful Moments</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (8).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Celebration & Joy</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (9).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Our Promise</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (10).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Love in Motion</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (11).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Picture Perfect</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (12).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Together Forever</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (13).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Pure Happiness</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (14).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Romance & Magic</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (15).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Cherished Memories</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (16).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Our Day</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (17).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Two Hearts, One Love</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (18).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Sanjana & Me</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (19).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">The Beginning</div>
+                        </div>
+                        <div class="wedding-photo-item">
+                            <img class="wedding-photo" src="images/wedding/wed (20).jpg" alt="Wedding photo" />
+                            <div class="wedding-photo-caption">Happily Ever After</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #6b7280; margin-top: 2rem; font-style: italic;">
+                        ✨ 20 beautiful memories from our special day, November 24, 2025 ✨
+                    </p>
+                </div>
+
+                <div class="wedding-section">
+                    <h3>💕 Our Wedding Stats</h3>
+                    <div class="wedding-stats">
+                        <div class="stat-box">
+                            <div class="stat-number" id="daysSinceWedding">0</div>
+                            <div class="stat-label">Days as Husband & Wife</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="nextAnniversary">328</div>
+                            <div class="stat-label">Days to 1st Anniversary</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wedding-section">
+                    <h3>💌 A Love Note</h3>
+                    <div class="wedding-note">
+                        <p>Sanjana, the day we got married was the happiest day of my life. But you know what? Every day with you as my wife makes me even happier. I can't wait to spend the rest of my life with you, making more beautiful memories together. I love you forever. 💕</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2054,6 +2329,7 @@
             
             if (pageId === 'countdown') updateCountdown();
             if (pageId === 'dailyNote') updateDailyNote();
+            if (pageId === 'wedding') updateWeddingStats();
             if (pageId === 'bucketList') renderBucketList();
             if (pageId === 'quiz') renderQuiz();
             if (pageId === 'stars') createStarField();
@@ -2117,6 +2393,29 @@
                     </div>
                 `;
             }, 1000);
+        }
+
+        // Wedding Stats
+        function updateWeddingStats() {
+            const weddingDate = new Date('2025-11-24');
+            const now = new Date();
+            const diff = now - weddingDate;
+            
+            const daysSinceWedding = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            // First anniversary is Nov 24, 2026
+            const nextAnniversary = new Date('2026-11-24');
+            const daysToAnniversary = Math.floor((nextAnniversary - now) / (1000 * 60 * 60 * 24));
+            
+            const daysSinceElement = document.getElementById('daysSinceWedding');
+            const nextAnniversaryElement = document.getElementById('nextAnniversary');
+            
+            if (daysSinceElement) {
+                daysSinceElement.textContent = daysSinceWedding;
+            }
+            if (nextAnniversaryElement) {
+                nextAnniversaryElement.textContent = Math.max(0, daysToAnniversary);
+            }
         }
 
         // Reasons
