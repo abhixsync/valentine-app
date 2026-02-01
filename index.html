@@ -754,6 +754,140 @@
             text-decoration: line-through;
         }
 
+        /* Love Letters */
+        .love-letters-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .love-letters-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .letter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .letter-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid #f472b6;
+            border-radius: 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .letter-textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+
+        .letter-char-count {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: right;
+        }
+
+        .letter-send-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .letter-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.3);
+        }
+
+        .letter-send-btn:active {
+            transform: translateY(0);
+        }
+
+        .letters-display {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .letters-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .letter-item {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+            border-left: 4px solid #ec4899;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .letter-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-text {
+            color: #1f2937;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .letter-delete-btn {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .letter-delete-btn:hover {
+            background-color: #fca5a5;
+        }
+
+        .no-letters {
+            color: #6b7280;
+            font-style: italic;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
         /* Coupons */
         .coupons-grid {
             display: grid;
@@ -1153,6 +1287,11 @@
                     <div class="feature-icon">✅</div>
                     <div class="feature-title">Our Bucket List</div>
                     <div class="feature-desc">Dreams to achieve together</div>
+                </div>
+                <div class="feature-card" onclick="showPage('loveLetters')">
+                    <div class="feature-icon">💌</div>
+                    <div class="feature-title">Love Letters</div>
+                    <div class="feature-desc">Words from my heart to you</div>
                 </div>
                 <div class="feature-card" onclick="showPage('easter')">
                     <div class="feature-icon">🔍</div>
@@ -1603,6 +1742,24 @@
         </div>
     </div>
 
+    <!-- Love Letters Page -->
+    <div id="loveLetters" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">💌 Love Letters for You</h2>
+            <div class="love-letters-container">
+                <div class="letter-form">
+                    <textarea id="letterInput" class="letter-textarea" placeholder="Write a love letter for Sanjana..." maxlength="500"></textarea>
+                    <div class="letter-char-count"><span id="charCount">0</span>/500</div>
+                    <button class="letter-send-btn" onclick="saveLoveLetter()">💕 Save Letter</button>
+                </div>
+                <div class="letters-display">
+                    <div id="lettersContainer" class="letters-list"></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
     <!-- Bucket List Page -->
     <div id="bucketList" class="content-page">
         <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
@@ -1900,6 +2057,7 @@
             if (pageId === 'bucketList') renderBucketList();
             if (pageId === 'quiz') renderQuiz();
             if (pageId === 'stars') createStarField();
+            if (pageId === 'loveLetters') renderLoveLetters();
         }
 
         function backToMenu() {
@@ -1981,6 +2139,64 @@
             const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
             const noteIndex = dayOfYear % loveNotes.length;
             document.getElementById('dailyNoteContent').textContent = loveNotes[noteIndex];
+        }
+
+        // Love Letters
+        function saveLoveLetter() {
+            const textarea = document.getElementById('letterInput');
+            const letterText = textarea.value.trim();
+            
+            if (!letterText) {
+                alert('Please write a letter first! 💕');
+                return;
+            }
+            
+            let letters = JSON.parse(localStorage.getItem('loveLetters')) || [];
+            
+            const newLetter = {
+                text: letterText,
+                date: new Date().toLocaleString()
+            };
+            
+            letters.unshift(newLetter);
+            
+            // Keep only last 50 letters
+            if (letters.length > 50) {
+                letters = letters.slice(0, 50);
+            }
+            
+            localStorage.setItem('loveLetters', JSON.stringify(letters));
+            textarea.value = '';
+            document.getElementById('charCount').textContent = '0';
+            renderLoveLetters();
+            alert('💕 Love letter saved! I\'ll treasure it forever!');
+        }
+
+        function renderLoveLetters() {
+            const container = document.getElementById('lettersContainer');
+            let letters = JSON.parse(localStorage.getItem('loveLetters')) || [];
+            
+            if (letters.length === 0) {
+                container.innerHTML = '<div class="no-letters">No love letters yet. Start writing! 💕</div>';
+                return;
+            }
+            
+            container.innerHTML = letters.map((letter, index) => `
+                <div class="letter-item">
+                    <div class="letter-date">${letter.date}</div>
+                    <div class="letter-text">${letter.text.replace(/\n/g, '<br>')}</div>
+                    <button class="letter-delete-btn" onclick="deleteLoveLetter(${index})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteLoveLetter(index) {
+            if (confirm('Delete this letter? This action cannot be undone. 💔')) {
+                let letters = JSON.parse(localStorage.getItem('loveLetters')) || [];
+                letters.splice(index, 1);
+                localStorage.setItem('loveLetters', JSON.stringify(letters));
+                renderLoveLetters();
+            }
         }
 
         // Coupons
@@ -2231,6 +2447,14 @@
             e.preventDefault();
             moveButton();
         });
+
+        // Love letter textarea character counter
+        const letterInput = document.getElementById('letterInput');
+        if (letterInput) {
+            letterInput.addEventListener('input', function() {
+                document.getElementById('charCount').textContent = this.value.length;
+            });
+        }
 
         // Initialize
         loadStates();
