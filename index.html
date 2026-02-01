@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>💕 For My Beautiful Sanjana 💕</title>
     <style>
         * {
             margin: 0;
@@ -12,15 +12,36 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-                sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #fce7f3 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 1rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+            animation: gradient-shift 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
         }
 
         body.celebration {
@@ -28,14 +49,30 @@
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 2rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04),
+                        0 0 0 1px rgba(236, 72, 153, 0.1);
             padding: 2rem;
             max-width: 32rem;
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: cardEntrance 0.6s ease-out;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         @media (min-width: 768px) {
@@ -46,11 +83,29 @@
 
         .owl-container {
             margin-bottom: 2rem;
+            animation: owlFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes owlFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-2deg); }
+            75% { transform: translateY(-10px) rotate(2deg); }
         }
 
         svg {
             width: 120px;
             height: 140px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .heart-pulse {
+            animation: heartPulse 1.5s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         h1 {
@@ -59,6 +114,12 @@
             color: #1f2937;
             margin-bottom: 3rem;
             line-height: 1.2;
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(236, 72, 153, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
         }
 
         @media (min-width: 768px) {
@@ -69,6 +130,18 @@
 
         .valentine-text {
             color: #ec4899;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ec4899, #f43f5e, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: colorShift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes colorShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .buttons-container {
@@ -101,15 +174,40 @@
 
         .yes-btn {
             padding: 1rem 3rem;
-            background: linear-gradient(to right, #ec4899, #f43f5e);
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
             color: white;
             font-size: 1.125rem;
             font-weight: 700;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .yes-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .yes-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .yes-btn:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.6);
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .yes-btn:active {
+            transform: scale(1.05) rotate(-1deg);
         }
 
         .no-btn {
@@ -128,6 +226,39 @@
             color: #4b5563;
             font-size: 0.875rem;
             font-style: italic;
+            animation: messageFade 2s ease-in-out infinite;
+        }
+
+        @keyframes messageFade {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating hearts background */
+        .floating-heart {
+            position: fixed;
+            font-size: 20px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Celebration Screen */
@@ -218,28 +349,47 @@
             margin-bottom: 1rem;
             display: inline-block;
             animation: bounce 0.8s ease-in-out infinite, scaleIn 0.5s ease-out;
-            filter: drop-shadow(0 4px 12px rgba(236, 72, 153, 0.4));
+            filter: drop-shadow(0 8px 16px rgba(236, 72, 153, 0.5));
         }
 
         .celebration-title {
             font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ec4899, #a855f7);
+            background: linear-gradient(135deg, #ec4899, #f43f5e, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
-            animation: scaleIn 0.6s ease-out;
+            animation: scaleIn 0.6s ease-out, rainbowText 3s ease infinite;
             letter-spacing: -1px;
+            background-size: 200% 200%;
+        }
+
+        @keyframes rainbowText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .celebration-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: #6b21a8;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 600;
             animation: fadeIn 0.8s ease-out 0.2s both;
             line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(107, 33, 168, 0.1);
+        }
+
+        .love-message {
+            font-size: 1.1rem;
+            color: #ec4899;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(236, 72, 153, 0.1);
+            border-radius: 1rem;
+            animation: fadeIn 1s ease-out 0.5s both;
+            font-weight: 500;
+            border: 2px solid rgba(236, 72, 153, 0.2);
         }
 
         .celebration-emoji {
@@ -247,6 +397,634 @@
             display: inline-block;
             animation: spin 2s linear infinite, float 2s ease-in-out infinite;
             filter: drop-shadow(0 4px 12px rgba(168, 85, 247, 0.3));
+        }
+
+        /* Navigation Menu */
+        .nav-container {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-container.show {
+            display: block;
+        }
+
+        .nav-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ec4899, #f43f5e, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
+            background-size: 200% 200%;
+            animation: colorShift 3s ease infinite;
+        }
+
+        /* Vertical Scrollable Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(236, 72, 153, 0.1);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Content Pages */
+        .content-page {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+            max-width: 1000px;
+            width: 100%;
+            padding: 2rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-page.show {
+            display: block !important;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(236, 72, 153, 0.1);
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ec4899;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Countdown Timer */
+        .countdown-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Photo Album */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .photo-item {
+            background: #f9fafb;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #fce7f3, #e9d5ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+            text-align: center;
+        }
+
+        /* Reasons */
+        .reason-display {
+            background: linear-gradient(135deg, #fce7f3, #e9d5ff);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .reason-text {
+            font-size: 1.5rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .next-reason-btn {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .next-reason-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ec4899, #a855f7);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #ec4899;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ec4899;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #ec4899;
+            top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-content {
+                width: calc(100% - 60px) !important;
+                margin-left: 60px !important;
+            }
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+
+        /* Bucket List */
+        .bucket-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bucket-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .bucket-item:hover {
+            border-color: #ec4899;
+            transform: translateX(10px);
+        }
+
+        .bucket-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ec4899;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bucket-item.checked .bucket-checkbox {
+            background: #ec4899;
+            color: white;
+        }
+
+        .bucket-item.checked {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        /* Coupons */
+        .coupons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .coupon {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .coupon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+        }
+
+        .coupon:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.5);
+        }
+
+        .coupon-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coupon-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coupon.redeemed {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        /* Date Ideas */
+        .date-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ec4899;
+            transition: all 0.3s ease;
+        }
+
+        .date-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .date-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ec4899;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quiz */
+        .quiz-question {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-option {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            border-color: #ec4899;
+            background: #fce7f3;
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .quiz-option.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        /* Recipe Book */
+        .recipe {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .recipe-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ec4899;
+            margin-bottom: 1rem;
+        }
+
+        .recipe-section {
+            margin: 1rem 0;
+        }
+
+        .recipe-section h4 {
+            color: #6b21a8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Map */
+        .travel-map {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .destination {
+            background: linear-gradient(135deg, #fce7f3, #e9d5ff);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .destination:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-flag {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Daily Note */
+        .daily-note {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.8;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Playlist */
+        .playlist {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+
+        .song-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .song-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-item:hover {
+            background: #fce7f3;
+            padding-left: 1.5rem;
+        }
+
+        .song-number {
+            font-weight: 700;
+            color: #ec4899;
+            width: 30px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-title {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Stars */
+        .stargazing {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        .constellation-name {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .constellation-desc {
+            text-align: center;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 10;
         }
     </style>
 </head>
@@ -273,7 +1051,7 @@
                 <!-- Right ear -->
                 <polygon points="90,15 100,5 85,20" fill="#D4A574" />
                 <!-- Heart on head -->
-                <g transform="translate(85, 8)">
+                <g transform="translate(85, 8)" class="heart-pulse">
                     <path
                         d="M 0,-5 C -2,-7 -6,-7 -8,-5 C -10,-3 -10,1 0,8 C 10,1 10,-3 8,-5 C 6,-7 2,-7 0,-5"
                         fill="#E91E63"
@@ -297,25 +1075,1071 @@
 
     <div id="celebration" class="celebration-container">
         <div class="big-heart">💕</div>
-        <h2 class="celebration-title">I love you!</h2>
-        <p class="celebration-subtitle">You make me the happiest person alive 💗</p>
-        <div class="celebration-emoji">🎉</div>
+        <h2 class="celebration-title">Yaaay! 🎉</h2>
+        <p class="celebration-subtitle">You just made my heart explode with joy! 💗</p>
+        <div class="love-message">
+            "Every moment with you feels like a beautiful dream. You're my favorite person, my best friend, and my forever Valentine. I can't wait to make more amazing memories with you! 🌟"
+        </div>
+        <div class="celebration-emoji">✨</div>
+        <button class="yes-btn" onclick="showMainMenu()" style="margin-top: 2rem;">Explore More 💖</button>
+    </div>
+
+    <!-- Main Navigation Menu -->
+    <div id="mainMenu" class="nav-container">
+        <h2 class="nav-title">💕 Everything for You, Sanjana 💕</h2>
+        <div class="features-grid" id="featuresGrid">
+                <div class="feature-card" onclick="showPage('countdown')">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-title">Our Journey</div>
+                    <div class="feature-desc">See how long we've been together</div>
+                </div>
+                <div class="feature-card" onclick="showPage('reasons')">
+                    <div class="feature-icon">💝</div>
+                    <div class="feature-title">Why I Love You</div>
+                    <div class="feature-desc">100 reasons and counting</div>
+                </div>
+                <div class="feature-card" onclick="showPage('photos')">
+                    <div class="feature-icon">📸</div>
+                    <div class="feature-title">Our Memories</div>
+                    <div class="feature-desc">Photo album of us</div>
+                </div>
+                <div class="feature-card" onclick="showPage('timeline')">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-title">Our Story</div>
+                    <div class="feature-desc">Timeline of our love</div>
+                </div>
+                <div class="feature-card" onclick="showPage('playlist')">
+                    <div class="feature-icon">🎵</div>
+                    <div class="feature-title">Our Songs</div>
+                    <div class="feature-desc">Music that reminds me of you</div>
+                </div>
+                <div class="feature-card" onclick="showPage('dateIdeas')">
+                    <div class="feature-icon">🌟</div>
+                    <div class="feature-title">Date Ideas</div>
+                    <div class="feature-desc">Fun things to do together</div>
+                </div>
+                <div class="feature-card" onclick="showPage('coupons')">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-title">Love Coupons</div>
+                    <div class="feature-desc">Special treats for you</div>
+                </div>
+                <div class="feature-card" onclick="showPage('quiz')">
+                    <div class="feature-icon">❓</div>
+                    <div class="feature-title">How Well Do You Know Me?</div>
+                    <div class="feature-desc">Take the fun quiz</div>
+                </div>
+                <div class="feature-card" onclick="showPage('stars')">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-title">Our Stars</div>
+                    <div class="feature-desc">Constellation just for us</div>
+                </div>
+                <!-- <div class="feature-card" onclick="showPage('recipes')">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <div class="feature-title">Our Recipes</div>
+                    <div class="feature-desc">Meals to cook together</div>
+                </div> -->
+                <div class="feature-card" onclick="showPage('travel')">
+                    <div class="feature-icon">✈️</div>
+                    <div class="feature-title">Travel Dreams</div>
+                    <div class="feature-desc">Places to explore together</div>
+                </div>
+                <!-- <div class="feature-card" onclick="showPage('dailyNote')">
+                    <div class="feature-icon">💌</div>
+                    <div class="feature-title">Daily Love Note</div>
+                    <div class="feature-desc">Today's message for you</div>
+                </div> -->
+                <div class="feature-card" onclick="showPage('bucketList')">
+                    <div class="feature-icon">✅</div>
+                    <div class="feature-title">Our Bucket List</div>
+                    <div class="feature-desc">Dreams to achieve together</div>
+                </div>
+                <div class="feature-card" onclick="showPage('easter')">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Secret Messages</div>
+                    <div class="feature-desc">Hidden surprises for you</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Page -->
+    <div id="countdown" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">⏰ Our Journey Together</h2>
+            <div class="countdown-display" id="countdownDisplay"></div>
+            <p style="text-align: center; color: #6b7280; margin-top: 2rem; font-style: italic;">
+                Every single moment with you is a treasure. Here's to countless more days, hours, and seconds together! 💕
+            </p>
+        </div>
+    </div>
+
+    <!-- Reasons Page -->
+    <div id="reasons" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">💝 Why I Love You</h2>
+            <div class="reason-display">
+                <div class="reason-text" id="reasonText">Click the button to see why you're amazing! 💕</div>
+                <button class="next-reason-btn" onclick="showNextReason()">Show Me Another Reason 💖</button>
+            </div>
+            <p style="text-align: center; color: #6b7280; margin-top: 1rem;">
+                <span id="reasonCount">0</span> reasons shown so far (infinite more to go!)
+            </p>
+        </div>
+    </div>
+
+    <!-- Photo Album Page -->
+    <div id="photos" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">📸 Our Beautiful Memories</h2>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img class="photo-img" src="images/first-date.jpg" alt="Our first date" />
+                    <div class="photo-caption">Our first date - the day I knew you were special</div>
+                </div>
+                <div class="photo-item">
+                    <img class="photo-img" src="images/birthday.jpg" alt="Your birthday celebration" />
+                    <div class="photo-caption">Your birthday celebration - seeing you happy is my favorite thing</div>
+                </div>
+                <div class="photo-item">
+                    <img class="photo-img" src="images/sunset.JPG" alt="Watching the sunset together" />
+                    <div class="photo-caption">Watching the sunset together - perfect moment</div>
+                </div>
+                <div class="photo-item">
+                    <img class="photo-img" src="images/pizza.JPG" alt="Pizza night" />
+                    <div class="photo-caption">Pizza night - even simple moments are magical with you</div>
+                </div>
+                <div class="photo-item">
+                    <img class="photo-img" src="images/holiday.jpg" alt="Holidays together" />
+                    <div class="photo-caption">Holidays together - making new traditions</div>
+                </div>
+                <!-- <div class="photo-item">
+                    <div class="photo-placeholder">🎮</div>
+                    <div class="photo-caption">Game night - you always beat me but I love it</div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">🌸</div>
+                    <div class="photo-caption">Spring walk - your smile brightens every day</div>
+                </div> -->
+                <div class="photo-item">
+                    <img class="photo-img" src="images/fav.JPG" alt="Our first date" />
+                    <div class="photo-caption">Every moment with you - my favorite memory is the next one we'll make</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #6b7280; margin-top: 2rem; font-style: italic;">
+                💡 Tip: Replace the placeholder emojis with real photos! Just upload images and update the HTML.
+            </p>
+        </div>
+    </div>
+
+    <!-- Timeline Page -->
+    <div id="timeline" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">📅 Our Love Story Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">🌟 We Met at Cogent Services</div>
+                        <p>It was your first day and I was immediately captivated. I asked you if you write poems - something that intrigued me deeply about you. That moment, I knew something special was starting.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">💬 A Question That Changed Everything</div>
+                        <p>"Do you write poems?" - Those simple words started a conversation that would change my life forever. Your answer opened up a world I didn't know I was missing.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">🍽️ Our First Date - CCSU</div>
+                        <p>We went to CCSU together and I was so nervous but so excited. Every moment spent with you felt magical, and I knew this was just the beginning of something beautiful.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">💕 The Moment I Realized I Love You</div>
+                        <p>I don't need a specific moment - every time I see you, I fall in love all over again. In that moment when I truly saw you for who you are, I knew with absolute certainty - you're the one I want forever.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">💋 First Kiss at a Friend's Wedding</div>
+                        <p>Among the celebration and joy, we shared our first kiss. It was perfect, magical, and felt like all the pieces of our love story came together in that one moment. I'll never forget it.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">💖 Today & Forever</div>
+                        <p>From that first day at Cogent Services to now, every moment with you has been extraordinary. You're my favorite person, my greatest love, and my forever. Here's to writing our story together, one beautiful day at a time. 💕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Page -->
+    <div id="playlist" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">🎵 Our Love Playlist</h2>
+            <div class="playlist">
+                <ul class="song-list">
+                    <li class="song-item">
+                        <span class="song-number">1</span>
+                        <div class="song-info">
+                            <div class="song-title">Dil to Bacha Hai Ji</div>
+                            <div class="song-artist">Ishqiya</div>
+                        </div>
+                        <span>💕</span>
+                    </li>
+                    <li class="song-item">
+                        <span class="song-number">2</span>
+                        <div class="song-info">
+                            <div class="song-title">Tum Ho</div>
+                            <div class="song-artist">Rockstar</div>
+                        </div>
+                        <span>💖</span>
+                    </li>
+                    <li class="song-item">
+                        <span class="song-number">3</span>
+                        <div class="song-info">
+                            <div class="song-title">Raabta</div>
+                            <div class="song-artist">Agent Vinod</div>
+                        </div>
+                        <span>💗</span>
+                    </li>
+                </ul>
+            </div>
+            <p style="text-align: center; color: #6b7280; margin-top: 2rem; font-style: italic;">
+                💡 Each song reminds me of a special moment with you 🎶
+            </p>
+        </div>
+    </div>
+
+    <!-- Date Ideas Page -->
+    <div id="dateIdeas" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">🌟 Our Future Date Ideas</h2>
+            <div class="date-card">
+                <div class="date-title">🌅 Sunrise Breakfast Picnic</div>
+                <p>Wake up early, pack our favorite foods, and watch the sunrise together at a beautiful spot.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🎨 Art Class Together</div>
+                <p>Let's try painting or pottery! It'll be fun even if we're terrible at it.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🍳 Cooking Challenge</div>
+                <p>Pick a cuisine we've never tried and cook it together. Winner gets kisses (but honestly we both win).</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🌃 Stargazing Night</div>
+                <p>Blankets, hot chocolate, and counting stars. Bonus: I'll point out our constellation!</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🎭 Theater or Concert</div>
+                <p>Dress up fancy and enjoy a show together. You'll look absolutely stunning.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🚴 Bike Adventure</div>
+                <p>Explore new places on bikes, stop for ice cream, and just enjoy being together.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">📚 Bookstore & Coffee Date</div>
+                <p>Browse books, pick one for each other, and discuss over coffee.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🏠 Cozy Movie Marathon</div>
+                <p>Pajamas, snacks, your favorite movies, and lots of cuddles.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🎮 Gaming Night</div>
+                <p>Co-op games, friendly competition, and lots of laughs.</p>
+            </div>
+            <div class="date-card">
+                <div class="date-title">🌸 Garden or Botanical Visit</div>
+                <p>Walk through beautiful gardens, take photos, and enjoy nature together.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupons Page -->
+    <div id="coupons" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">🎁 Love Coupons for You</h2>
+            <p style="text-align: center; color: #6b7280; margin-bottom: 2rem;">
+                Click on any coupon to redeem it! These are yours anytime you want. 💕
+            </p>
+            <div class="coupons-grid">
+                <div class="coupon" onclick="redeemCoupon(this, 0)">
+                    <div class="coupon-title">💆 Full Body Massage</div>
+                    <div class="coupon-desc">30 minutes of pure relaxation</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 1)">
+                    <div class="coupon-title">🍳 Breakfast in Bed</div>
+                    <div class="coupon-desc">Your favorite breakfast, served with love</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 2)">
+                    <div class="coupon-title">🎬 Movie Night of Your Choice</div>
+                    <div class="coupon-desc">You pick, I'll watch happily</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 3)">
+                    <div class="coupon-title">🧹 I'll Do Your Chores</div>
+                    <div class="coupon-desc">Any chore, no complaints</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 4)">
+                    <div class="coupon-title">🍕 Dinner at Your Favorite Restaurant</div>
+                    <div class="coupon-desc">Anywhere you want to go</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 5)">
+                    <div class="coupon-title">🛍️ Shopping Spree</div>
+                    <div class="coupon-desc">I'll carry the bags and say everything looks great</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 6)">
+                    <div class="coupon-title">📸 Personal Photoshoot</div>
+                    <div class="coupon-desc">I'll be your photographer for the day</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 7)">
+                    <div class="coupon-title">🎮 Game of Your Choice</div>
+                    <div class="coupon-desc">I'll play any game you want</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 8)">
+                    <div class="coupon-title">☕ Coffee/Tea Run</div>
+                    <div class="coupon-desc">I'll get your favorite drink anytime</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 9)">
+                    <div class="coupon-title">💝 Surprise Date</div>
+                    <div class="coupon-desc">I'll plan everything - it'll be amazing</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 10)">
+                    <div class="coupon-title">🎵 Serenade</div>
+                    <div class="coupon-desc">I'll sing your favorite song (no judging!)</div>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this, 11)">
+                    <div class="coupon-title">🤗 Unlimited Cuddles</div>
+                    <div class="coupon-desc">As long as you want, whenever you want</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">❓ How Well Do You Know Me?</h2>
+            <div id="quizContainer"></div>
+            <div id="quizResult" style="text-align: center; margin-top: 2rem; font-size: 1.2rem; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Stars Page -->
+    <div id="stars" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">⭐ Our Constellation</h2>
+            <div class="stargazing" id="starField">
+                <div class="constellation-name">The Constellation of Sanjana</div>
+                <div class="constellation-desc">
+                    In the vast universe, I found you - my brightest star. This constellation represents us, 
+                    shining together forever. Each star is a moment we've shared, and they'll keep growing. ✨
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipes Page -->
+    <div id="recipes" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">👨‍🍳 Recipes to Cook Together</h2>
+            <div class="recipe">
+                <div class="recipe-title">🍝 Creamy Garlic Pasta</div>
+                <div class="recipe-section">
+                    <h4>Ingredients:</h4>
+                    <p>Pasta, heavy cream, garlic, parmesan, butter, salt, pepper, parsley</p>
+                </div>
+                <div class="recipe-section">
+                    <h4>Steps:</h4>
+                    <p>1. Cook pasta according to package<br>
+                    2. Sauté minced garlic in butter<br>
+                    3. Add cream and parmesan, simmer<br>
+                    4. Toss with pasta and garnish with parsley<br>
+                    5. Enjoy together! 💕</p>
+                </div>
+            </div>
+            <div class="recipe">
+                <div class="recipe-title">🍫 Chocolate Lava Cake</div>
+                <div class="recipe-section">
+                    <h4>Ingredients:</h4>
+                    <p>Dark chocolate, butter, eggs, sugar, flour, vanilla extract</p>
+                </div>
+                <div class="recipe-section">
+                    <h4>Steps:</h4>
+                    <p>1. Melt chocolate with butter<br>
+                    2. Whisk eggs with sugar<br>
+                    3. Combine and add flour<br>
+                    4. Pour into ramekins<br>
+                    5. Bake at 425°F for 12-14 minutes<br>
+                    6. Share the gooey center! 🍫</p>
+                </div>
+            </div>
+            <div class="recipe">
+                <div class="recipe-title">🥞 Perfect Pancakes</div>
+                <div class="recipe-section">
+                    <h4>Ingredients:</h4>
+                    <p>Flour, milk, eggs, sugar, baking powder, butter, vanilla, maple syrup</p>
+                </div>
+                <div class="recipe-section">
+                    <h4>Steps:</h4>
+                    <p>1. Mix dry ingredients<br>
+                    2. Add wet ingredients<br>
+                    3. Cook on griddle until bubbles form<br>
+                    4. Flip and cook until golden<br>
+                    5. Stack high and top with your favorites! 🥞</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Travel Page -->
+    <div id="travel" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">✈️ Places We'll Explore Together</h2>
+            <div class="travel-map">
+                <p style="text-align: center; color: #6b7280; margin-bottom: 1rem;">
+                    Our dream destinations - let's make them all come true! 🌍
+                </p>
+                <div class="destinations">
+                    <div class="destination">
+                        <div class="destination-flag">🗼</div>
+                        <div><strong>Paris, France</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">City of Love</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🗾</div>
+                        <div><strong>Tokyo, Japan</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Cherry Blossoms</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🏝️</div>
+                        <div><strong>Maldives</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Beach Paradise</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🏔️</div>
+                        <div><strong>Swiss Alps</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Mountain Magic</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🎭</div>
+                        <div><strong>Venice, Italy</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Romantic Canals</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🌸</div>
+                        <div><strong>Santorini, Greece</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Sunset Views</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🏛️</div>
+                        <div><strong>Rome, Italy</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Ancient History</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🎨</div>
+                        <div><strong>Barcelona, Spain</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Art & Culture</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🌴</div>
+                        <div><strong>Bali, Indonesia</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Tropical Paradise</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🗽</div>
+                        <div><strong>New York City</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">The Big Apple</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🌉</div>
+                        <div><strong>San Francisco</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Golden Gate</div>
+                    </div>
+                    <div class="destination">
+                        <div class="destination-flag">🏰</div>
+                        <div><strong>Prague, Czech</strong></div>
+                        <div style="font-size: 0.9rem; color: #6b7280;">Fairy Tale City</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Note Page -->
+    <div id="dailyNote" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">💌 Today's Love Note for You</h2>
+            <div class="daily-note" id="dailyNoteContent">
+                Loading your special message...
+            </div>
+            <p style="text-align: center; color: #6b7280; margin-top: 2rem; font-style: italic;">
+                A new message appears each day, just for you 💕
+            </p>
+        </div>
+    </div>
+
+    <!-- Bucket List Page -->
+    <div id="bucketList" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">✅ Our Couple's Bucket List</h2>
+            <p style="text-align: center; color: #6b7280; margin-bottom: 2rem;">
+                Click to check off items as we complete them together! 🎯
+            </p>
+            <ul class="bucket-list" id="bucketListItems"></ul>
+        </div>
+    </div>
+
+    <!-- Easter Eggs Page -->
+    <div id="easter" class="content-page">
+        <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+        <div class="content-card">
+            <h2 class="content-title">🔍 Secret Messages for You</h2>
+            <div style="padding: 2rem; text-align: center;">
+                <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
+                    <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #1</h3>
+                    <p style="font-size: 1.1rem;">Click on the floating hearts in the background to make them bigger! 💕</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
+                    <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #2</h3>
+                    <p style="font-size: 1.1rem;">Double-click the owl on the first page to make it dance! 🦉</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
+                    <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #3</h3>
+                    <p style="font-size: 1.1rem;">Press the up arrow key 3 times for a surprise! ⬆️⬆️⬆️</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
+                    <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Biggest Secret</h3>
+                    <p style="font-size: 1.3rem; font-weight: 700;">I love you more than all these pages combined! 💕💕💕</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Data
+        const reasons = [
+            "Your smile lights up my entire world 😊",
+            "You make even the boring days feel magical ✨",
+            "Your laugh is my favorite sound in the universe 🎵",
+            "You're incredibly smart and inspire me every day 🧠",
+            "The way you care about others shows your beautiful heart 💖",
+            "You're always there when I need you 🤗",
+            "Your hugs are the best thing ever 🫂",
+            "You make me want to be a better person 🌟",
+            "Your eyes are absolutely mesmerizing 👀",
+            "You understand me like no one else does 💭",
+            "Your kindness touches everyone around you 🌸",
+            "You're strong even when things are tough 💪",
+            "The way you pursue your dreams is inspiring 🎯",
+            "You make me laugh until my stomach hurts 😂",
+            "Your presence alone makes everything better 💫",
+            "You're beautiful inside and out 💝",
+            "You never give up on what you believe in 🔥",
+            "Your creativity amazes me constantly 🎨",
+            "You make ordinary moments feel extraordinary 🌈",
+            "Your voice is like music to my ears 🎶",
+            "You're passionate about the things you love ❤️",
+            "The way you think fascinates me 🤔",
+            "You're honest and genuine - always yourself 🌟",
+            "Your energy is contagious in the best way ⚡",
+            "You make me feel loved every single day 💕",
+            "Your cooking is amazing (and your company even better!) 🍳",
+            "You're thoughtful in ways that surprise me 🎁",
+            "The little things you do mean everything to me 💝",
+            "You're adventurous and up for anything 🚀",
+            "Your optimism helps me see the bright side 🌞",
+            "You're an incredible listener 👂",
+            "The way you care about your family is beautiful 👨‍👩‍👧‍👦",
+            "You make me feel safe and comfortable 🏠",
+            "Your determination is unstoppable 🎯",
+            "You're supportive of my dreams too 🌠",
+            "The way you love is pure and true 💗",
+            "You're funny without even trying 😄",
+            "Your intelligence is so attractive 📚",
+            "You make every place feel like home 🏡",
+            "Your style is uniquely you and I love it 👗",
+            "You're patient with me even when I'm annoying 😅",
+            "The way you dance (even badly) makes me smile 💃",
+            "You're my best friend and my love 👫",
+            "Your strength inspires me daily 💪",
+            "You make me believe in forever 💍",
+            "The way you play with animals is adorable 🐾",
+            "Your ambition drives you forward 🚀",
+            "You're generous with your time and love 🕐",
+            "The way you sing (in or out of tune!) 🎤",
+            "You make sacrifices without complaining 💝",
+            "Your faith in me gives me confidence 🌟",
+            "You're spontaneous and keep life exciting 🎢",
+            "The way you care about details 🔍",
+            "You're respectful and considerate always 🙏",
+            "Your empathy for others is remarkable 💚",
+            "You make me feel special every day 👑",
+            "The way you challenge me to grow 📈",
+            "You're loyal and trustworthy 🛡️",
+            "Your quirks make you perfectly imperfect 🤪",
+            "You remember the little things I tell you 💭",
+            "The way you get excited about things you love 🎉",
+            "You're affectionate and loving 💋",
+            "Your drive to succeed motivates me 🏆",
+            "You make me feel understood 🤝",
+            "The way you handle challenges with grace 🌺",
+            "You're my favorite person to talk to 💬",
+            "Your random texts make my day better 📱",
+            "You're genuine - no fake, just real 💯",
+            "The way you look at me melts my heart 😍",
+            "You're independent and strong on your own 💪",
+            "Your ideas are always interesting 💡",
+            "You make me want to plan a future together 🗺️",
+            "The way you apologize when you're wrong ❤️",
+            "You're forgiving and don't hold grudges 🕊️",
+            "Your taste in [music/movies/etc] is great! 🎬",
+            "You make me feel proud to be with you 🥰",
+            "The way you handle stress is admirable 😌",
+            "You're my biggest cheerleader 📣",
+            "Your cuddles are the best medicine 💊",
+            "You make me believe in love 💘",
+            "The way you smell (yes, I said it!) 🌹",
+            "You're responsible and reliable 📋",
+            "Your goals and dreams align with mine 🎯",
+            "You make time for us no matter how busy 📅",
+            "The way you comfort me when I'm down 🫂",
+            "You're playful and know how to have fun 🎮",
+            "Your morning texts start my day perfectly ☀️",
+            "You make me feel like the luckiest person alive 🍀",
+            "The way you support my crazy ideas 🎪",
+            "You're exactly who I want to grow old with 👵👴",
+            "Your presence is my favorite present 🎁",
+            "You make love feel easy and natural 💫",
+            "The way you are with kids is heartwarming 👶",
+            "You're my today and all of my tomorrows 💕",
+            "Your imperfections make you perfect to me 💖",
+            "You challenge me to be my best self 🌟",
+            "The way you've changed my life for the better 🌈",
+            "You're not just my Valentine - you're my everything 💝",
+            "Because loving you is the easiest thing I've ever done 💕"
+        ];
+
+        const loveNotes = [
+            "Good morning, beautiful! Just wanted to remind you that you're the first thing I think about when I wake up. Have an amazing day! ☀️💕",
+            "Every day with you is a new adventure. Thank you for making life so exciting and wonderful! 🌟",
+            "Just thinking about you and smiling. You have that effect on me - always. 😊💖",
+            "Distance means so little when someone means so much. Thinking of you always! 💭💕",
+            "You're my favorite notification, my favorite hello, and my absolute favorite person. 📱❤️",
+            "If I could give you one thing, it would be the ability to see yourself through my eyes. You're incredible! 👀💝",
+            "Home isn't a place, it's a person. And you're my home. 🏠💕",
+            "Thank you for being you - weird, wonderful, and absolutely perfect. 🌈",
+            "I fall in love with you more and more every single day. How is that even possible? 💘",
+            "You're the reason I believe in love, in forever, and in happily ever after. 💍✨",
+            "Just wanted to say I love you. No reason needed - just love you! 💕",
+            "You make my heart smile in ways I didn't know were possible. 😊❤️",
+            "Every love song suddenly makes sense when I think of you. 🎵💖",
+            "You're not just my love, you're my best friend, my partner, and my everything. 👫💕",
+            "Can't wait to see you again and give you the biggest hug! 🫂💕",
+            "You + Me = The best equation ever! 💕➕💕",
+            "Thanks for loving me even when I'm being difficult. You're the best! 💝",
+            "My favorite place is inside your hug. 🤗💕",
+            "Life with you is an adventure I never want to end. 🗺️❤️",
+            "You're the peanut butter to my jelly, the smile to my face, the beat to my heart. 💓",
+            "Just a reminder: You're amazing, you're loved, and you're mine! 💕",
+            "Can't stop, won't stop thinking about you. 💭💖",
+            "You make ordinary moments feel like magic. ✨💕",
+            "Forever isn't long enough with you. ♾️💕",
+            "You're my sunshine on cloudy days. ☀️💕",
+            "Loving you is my favorite thing to do. 💖",
+            "You're the plot twist I never saw coming and the happy ending I always wanted. 📖💕",
+            "I choose you. Today, tomorrow, and every day after that. 💍💕",
+            "You're my favorite distraction and my biggest motivation. 💪💕",
+            "Thanks for being my person. You're the best person. 👫💕",
+            "Every moment without you feels incomplete. Can't wait to see you! ⏰💕"
+        ];
+
+        const bucketListItems = [
+            "Watch a sunrise together 🌅",
+            "Go stargazing and find our constellation ⭐",
+            "Take a cooking class together 👨‍🍳",
+            "Learn a dance together 💃",
+            "Road trip to somewhere we've never been 🚗",
+            "Build a blanket fort and watch movies 🏰",
+            "Plant a tree together 🌳",
+            "Write letters to our future selves 📝",
+            "Try a new restaurant every month 🍽️",
+            "Take a couples' photo shoot 📸",
+            "Learn each other's favorite childhood games 🎮",
+            "Create a time capsule 📦",
+            "Go camping under the stars ⛺",
+            "Take a weekend trip spontaneously ✈️",
+            "Learn a new language together 🗣️",
+            "Volunteer for a cause we care about 🤝",
+            "Have a picnic in the park 🧺",
+            "Go to a concert of our favorite artist 🎵",
+            "Try extreme sports together 🪂",
+            "Create our own tradition 🎉",
+            "Visit all the places from our travel list 🗺️",
+            "Write and perform a song together 🎤",
+            "Take an art class 🎨",
+            "Go on a hot air balloon ride 🎈",
+            "Have a fancy date night at home 🕯️",
+            "Learn to make each other's favorite foods 🍳",
+            "Watch all the sunrise and sunsets we can 🌄",
+            "Create a photo album of our memories 📷",
+            "Go on a mystery date (surprise each other) 🎁",
+            "Dance in the rain together ☔",
+            "Visit an amusement park 🎢",
+            "Have a game night tournament 🎲",
+            "Go wine/coffee tasting ☕",
+            "Take a pottery class 🏺",
+            "Have a karaoke night 🎤",
+            "Go to a drive-in movie 🚗🎬",
+            "Explore a new city together 🏙️",
+            "Have a spa day together 💆",
+            "Go fruit picking 🍓",
+            "Watch the stars from a beach 🏖️",
+            "Create matching couple items 👕",
+            "Go indoor skydiving 🪂",
+            "Have a fondue night 🫕",
+            "Visit a botanical garden 🌺",
+            "Go ice skating ⛸️",
+            "Have a bonfire night 🔥",
+            "Take ballroom dancing lessons 💃",
+            "Go to a comedy show together 😂",
+            "Have breakfast in bed ☕🛏️",
+            "Grow old together and still be in love 👵👴💕"
+        ];
+
+        const quizQuestions = [
+            {
+                question: "What's my favorite color?",
+                options: ["Blue", "Red", "Black", "Purple"],
+                correct: 2
+            },
+            {
+                question: "What's my comfort food?",
+                options: ["Pizza", "Noodles", "Pasta", "Burgers"],
+                correct: 1
+            },
+            {
+                question: "What's my biggest fear?",
+                options: ["Heights", "Spiders", "Losing you", "Public Speaking"],
+                correct: 2
+            },
+            {
+                question: "What's my dream vacation destination?",
+                options: ["Beach Resort", "Mountain Retreat", "City Tour", "Adventure Trek"],
+                correct: 3
+            },
+            {
+                question: "What's my love language?",
+                options: ["Words of Affirmation", "Quality Time", "Physical Touch", "All of the above"],
+                correct: 3
+            },
+            {
+                question: "What do I value most in our relationship?",
+                options: ["Trust", "Communication", "Laughter", "All of these"],
+                correct: 3
+            },
+            {
+                question: "What's my favorite thing about you?",
+                options: ["Your smile", "Your kindness", "Your humor", "Everything"],
+                correct: 3
+            }
+        ];
+
+        // State management
+        let currentReasonIndex = -1;
+        let reasonsShown = 0;
+        let couponStates = new Array(12).fill(false);
+        let bucketListStates = new Array(bucketListItems.length).fill(false);
+        let currentQuizQuestion = 0;
+        let quizScore = 0;
+
+        // Load saved states
+        function loadStates() {
+            const savedCoupons = localStorage.getItem('couponStates');
+            const savedBucket = localStorage.getItem('bucketListStates');
+            if (savedCoupons) couponStates = JSON.parse(savedCoupons);
+            if (savedBucket) bucketListStates = JSON.parse(savedBucket);
+        }
+
+        // Navigation
+        function showPage(pageId) {
+            document.getElementById('mainMenu').classList.remove('show');
+            document.getElementById('mainMenu').style.display = 'none';
+            const page = document.getElementById(pageId);
+            page.classList.add('show');
+            page.style.display = 'block';
+            
+            if (pageId === 'countdown') updateCountdown();
+            if (pageId === 'dailyNote') updateDailyNote();
+            if (pageId === 'bucketList') renderBucketList();
+            if (pageId === 'quiz') renderQuiz();
+            if (pageId === 'stars') createStarField();
+        }
+
+        function backToMenu() {
+            // Hide all content pages
+            document.querySelectorAll('.content-page').forEach(page => {
+                page.classList.remove('show');
+                page.style.display = 'none';
+            });
+            // Hide celebration page
+            const celebration = document.getElementById('celebration');
+            celebration.classList.remove('show');
+            celebration.style.display = 'none';
+            // Show main menu
+            const mainMenu = document.getElementById('mainMenu');
+            mainMenu.classList.add('show');
+            mainMenu.style.display = 'block';
+            // Scroll to top
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+
+        function showMainMenu() {
+            document.getElementById('celebration').classList.remove('show');
+            document.getElementById('mainMenu').classList.add('show');
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const startDate = new Date('2017-07-07');
+            
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - startDate;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdownDisplay').innerHTML = `
+                    <div class="countdown-item">
+                        <span class="countdown-number">${days}</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">${hours}</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">${minutes}</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number">${seconds}</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        // Reasons
+        function showNextReason() {
+            currentReasonIndex = Math.floor(Math.random() * reasons.length);
+            document.getElementById('reasonText').textContent = reasons[currentReasonIndex];
+            reasonsShown++;
+            document.getElementById('reasonCount').textContent = reasonsShown;
+            
+            // Add animation
+            const reasonDisplay = document.querySelector('.reason-display');
+            reasonDisplay.style.animation = 'none';
+            setTimeout(() => {
+                reasonDisplay.style.animation = 'scaleIn 0.5s ease-out';
+            }, 10);
+        }
+
+        // Daily Love Note
+        function updateDailyNote() {
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const noteIndex = dayOfYear % loveNotes.length;
+            document.getElementById('dailyNoteContent').textContent = loveNotes[noteIndex];
+        }
+
+        // Coupons
+        function redeemCoupon(element, index) {
+            if (!couponStates[index]) {
+                if (confirm('Are you sure you want to redeem this coupon? 💕')) {
+                    couponStates[index] = true;
+                    element.classList.add('redeemed');
+                    localStorage.setItem('couponStates', JSON.stringify(couponStates));
+                    alert('Coupon redeemed! I can\'t wait to make this happen for you! 💖');
+                }
+            } else {
+                alert('This coupon has already been redeemed! But don\'t worry, we can do it again! 😊');
+            }
+        }
+
+        // Bucket List
+        function renderBucketList() {
+            const container = document.getElementById('bucketListItems');
+            container.innerHTML = bucketListItems.map((item, index) => `
+                <li class="bucket-item ${bucketListStates[index] ? 'checked' : ''}" onclick="toggleBucketItem(${index})">
+                    <div class="bucket-checkbox">${bucketListStates[index] ? '✓' : ''}</div>
+                    <div>${item}</div>
+                </li>
+            `).join('');
+        }
+
+        function toggleBucketItem(index) {
+            bucketListStates[index] = !bucketListStates[index];
+            localStorage.setItem('bucketListStates', JSON.stringify(bucketListStates));
+            renderBucketList();
+        }
+
+        // Quiz
+        function renderQuiz() {
+            if (currentQuizQuestion >= quizQuestions.length) {
+                document.getElementById('quizContainer').innerHTML = '';
+                document.getElementById('quizResult').style.display = 'block';
+                const percentage = (quizScore / quizQuestions.length * 100).toFixed(0);
+                document.getElementById('quizResult').innerHTML = `
+                    <h3 style="color: #ec4899; margin-bottom: 1rem;">Quiz Complete! 🎉</h3>
+                    <p style="font-size: 1.5rem; margin-bottom: 1rem;">You scored ${quizScore}/${quizQuestions.length}</p>
+                    <p style="color: #6b7280;">${percentage >= 70 ? 'You know me so well! 💕' : 'We should spend more time together! 😊'}</p>
+                    <button class="next-reason-btn" onclick="restartQuiz()" style="margin-top: 2rem;">Take Again</button>
+                `;
+                return;
+            }
+
+            const q = quizQuestions[currentQuizQuestion];
+            document.getElementById('quizContainer').innerHTML = `
+                <div class="quiz-question">
+                    <h3 style="color: #1f2937; margin-bottom: 1.5rem;">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">${q.question}</p>
+                    <div class="quiz-options">
+                        ${q.options.map((option, index) => `
+                            <div class="quiz-option" onclick="answerQuiz(${index})">${option}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function answerQuiz(selected) {
+            const q = quizQuestions[currentQuizQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            if (selected === q.correct) {
+                options[selected].classList.add('correct');
+                quizScore++;
+            } else {
+                options[selected].classList.add('wrong');
+                options[q.correct].classList.add('correct');
+            }
+            
+            setTimeout(() => {
+                currentQuizQuestion++;
+                renderQuiz();
+            }, 1500);
+        }
+
+        function restartQuiz() {
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            document.getElementById('quizResult').style.display = 'none';
+            renderQuiz();
+        }
+
+        // Star Field
+        function createStarField() {
+            const starField = document.getElementById('starField');
+            // Clear existing stars except text
+            const texts = starField.querySelectorAll('.constellation-name, .constellation-desc');
+            starField.innerHTML = '';
+            texts.forEach(text => starField.appendChild(text));
+            
+            // Create stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starField.appendChild(star);
+            }
+        }
+
+        // Create floating hearts in background
+        function createFloatingHearts() {
+            const hearts = ['💕', '💖', '💗', '💝', '❤️'];
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                
+                // Easter egg: click to make bigger
+                heart.addEventListener('click', function() {
+                    this.style.fontSize = (parseInt(this.style.fontSize) * 1.5) + 'px';
+                });
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 8000);
+            }, 800);
+        }
+
         function createConfetti() {
-            const confettiCount = 50;
+            const confettiCount = 100;
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.top = '-10px';
-                confetti.style.background = ['#ec4899', '#f43f5e', '#a855f7', '#fbbf24'][Math.floor(Math.random() * 4)];
+                confetti.style.background = ['#ec4899', '#f43f5e', '#a855f7', '#fbbf24', '#ef4444'][Math.floor(Math.random() * 5)];
                 confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
                 document.body.appendChild(confetti);
                 
                 setTimeout(() => confetti.remove(), 3500);
             }
+            
+            setTimeout(() => {
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = ['#ec4899', '#f43f5e', '#a855f7', '#fbbf24', '#ef4444'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3500);
+                }
+            }, 1000);
         }
 
         function showCelebration() {
@@ -323,20 +2147,60 @@
             document.getElementById('celebration').classList.add('show');
             document.body.classList.add('celebration');
             createConfetti();
+            
+            setTimeout(() => {
+                const title = document.querySelector('.celebration-title');
+                title.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    title.style.transform = 'scale(1)';
+                }, 200);
+            }, 300);
         }
 
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            const randomX = Math.random() * 200 - 100;
-            const randomY = Math.random() * 200 - 100;
+            const randomX = Math.random() * 300 - 150;
+            const randomY = Math.random() * 300 - 150;
+            
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            const yesBtn = document.querySelector('.yes-btn');
+            const currentSize = parseFloat(getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 1) + 'px';
+            yesBtn.style.padding = '1rem ' + (3 + Math.random()) + 'rem';
         }
 
-        // Add touch support for mobile
-        document.getElementById('noBtn').addEventListener('touchstart', function(e) {
+        // Easter Eggs
+        let upArrowCount = 0;
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp') {
+                upArrowCount++;
+                if (upArrowCount === 3) {
+                    alert('🎉 You found the secret! Here\'s a special message: You make every day feel like a celebration! I love you! 💕');
+                    upArrowCount = 0;
+                }
+            } else {
+                upArrowCount = 0;
+            }
+        });
+
+        // Owl dance easter egg
+        document.querySelector('.owl-container')?.addEventListener('dblclick', function() {
+            this.style.animation = 'spin 1s ease-in-out';
+            setTimeout(() => {
+                this.style.animation = 'owlFloat 3s ease-in-out infinite';
+            }, 1000);
+        });
+
+        // Mobile touch support
+        document.getElementById('noBtn')?.addEventListener('touchstart', function(e) {
             e.preventDefault();
             moveButton();
         });
+
+        // Initialize
+        loadStates();
+        createFloatingHearts();
     </script>
 </body>
 </html>
