@@ -37,6 +37,7 @@
                 radial-gradient(circle at 40% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
             animation: gradient-shift 15s ease infinite;
             z-index: 0;
+            pointer-events: none;
         }
 
         @keyframes gradient-shift {
@@ -240,8 +241,8 @@
             font-size: 20px;
             animation: floatUp 8s linear infinite;
             opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
+            pointer-events: auto;
+            z-index: 1;
         }
 
         @keyframes floatUp {
@@ -1060,7 +1061,7 @@
             </svg>
         </div>
 
-        <h1>
+        <h1 id="mainTitle">
            Sanjana will you be my
             <span class="valentine-text">valentine</span>?
         </h1>
@@ -1622,7 +1623,7 @@
             <div style="padding: 2rem; text-align: center;">
                 <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
                     <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #1</h3>
-                    <p style="font-size: 1.1rem;">Click on the floating hearts in the background to make them bigger! 💕</p>
+                    <p style="font-size: 1.1rem;">Tap the main title 5 times for a surprise! ✨</p>
                 </div>
                 <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
                     <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #2</h3>
@@ -1630,7 +1631,8 @@
                 </div>
                 <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
                     <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Secret #3</h3>
-                    <p style="font-size: 1.1rem;">Press the up arrow key 3 times for a surprise! ⬆️⬆️⬆️</p>
+                    <p style="font-size: 1.1rem;">Press the up arrow key 3 times (or tap below 3 times) for a surprise! ⬆️⬆️⬆️</p>
+                    <button id="secretTapBtn" class="back-btn" style="margin-top: 1rem;">Tap Me 3 Times 📱</button>
                 </div>
                 <div style="background: linear-gradient(135deg, #fce7f3, #e9d5ff); padding: 2rem; border-radius: 1rem; margin: 1rem 0;">
                     <h3 style="color: #ec4899; margin-bottom: 1rem;">💝 Biggest Secret</h3>
@@ -2183,6 +2185,38 @@
                 upArrowCount = 0;
             }
         });
+
+        // Secret #1: Tap main title 5 times
+        let titleTapCount = 0;
+        const mainTitle = document.getElementById('mainTitle');
+        if (mainTitle) {
+            mainTitle.addEventListener('click', function() {
+                titleTapCount++;
+                if (titleTapCount === 5) {
+                    alert('💖 Secret unlocked: You are my favorite person in every universe.');
+                    titleTapCount = 0;
+                }
+                setTimeout(() => {
+                    titleTapCount = 0;
+                }, 1500);
+            });
+        }
+
+        // Mobile tap easter egg (Secret #3)
+        let tapCount = 0;
+        const tapBtn = document.getElementById('secretTapBtn');
+        if (tapBtn) {
+            tapBtn.addEventListener('click', function() {
+                tapCount++;
+                if (tapCount === 3) {
+                    alert('🎉 You found the secret! Here\'s a special message: You make every day feel like a celebration! I love you! 💕');
+                    tapCount = 0;
+                }
+                setTimeout(() => {
+                    tapCount = 0;
+                }, 1500);
+            });
+        }
 
         // Owl dance easter egg
         document.querySelector('.owl-container')?.addEventListener('dblclick', function() {
